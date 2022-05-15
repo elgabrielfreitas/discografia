@@ -16,6 +16,7 @@ class AddTrack extends React.Component {
       return
     }
     this.props.addTrackHandler(this.state);
+    this.props.closeModal(false)
     this.setState({number:"", track:"", duration:""})
   };
   render() {
@@ -50,7 +51,8 @@ class AddTrack extends React.Component {
                     onChange={(e) => this.setState({duration: e.target.value})}
                   />
               </div>
-              <button className="button">Adicionar</button>
+              <button className="button-blue">Adicionar</button>
+              <button className="button-red" onClick={() => this.props.closeModal(false)}>Cancelar</button>
           </form>
       </div>
     );

@@ -1,6 +1,6 @@
 # Discografia
 
-Teste Técnico para empresa Supliu
+Teste de Conhecimento para empresa Supliu
 
 ## Funcional
 Intalar as dependências:
