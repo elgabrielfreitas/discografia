@@ -8,3 +8,7 @@ Intalar as dependências:
 
 Para rodar a aplicação:
 ### `yarn start`
+
+## Deploy
+
+https://discografia.vercel.app/

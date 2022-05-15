@@ -33,7 +33,6 @@ const TrackList = ({tracks, deleteTrack, term, searchKey, addNewTrack}) => {
                     onChange={getSearch}
                 ></input>
                 <button className="button" onClick={() => addNewTrack(true)}>Adicionar Faixa</button>
-
             </div>
         </div>
         <div className="list-container">
