@@ -1,27 +1,60 @@
 import React from "react";
 import './index.css';
 
-const AddTrack = () => {
-  return (
-    <div className="add-list-container">
-        <h2 className="add-list-title">Adicionar Faixa</h2>
-        <form className="">
-        <div className="">
-                <label>Álbum</label>
-                <input type="text" placeholder="Álbum" />
-            </div>
-            <div className="">
-                <label>Faixa</label>
-                <input type="text" placeholder="Faixa" />
-            </div>
-            <div className="">
-                <label>Duração</label>
-                <input type="text" placeholder="Duração" />
-            </div>
-            <button className="button">Adicionar</button>
-        </form>
-    </div>
-  );
-};
+class AddTrack extends React.Component {
+
+  state = {
+    number: "",
+    track: "",
+    duration: ""
+  }
+
+  add = (e) => {
+    e.preventDefault();
+    if (this.state.number === "" || this.state.track === "" || this.state.duration === "") {
+      alert("Preencha todos os campos");
+      return
+    }
+    this.props.addTrackHandler(this.state);
+    this.setState({number:"", track:"", duration:""})
+  };
+  render() {
+    return (
+      <div className="add-list-container">
+          <h2 className="add-list-title">Adicionar Faixa</h2>
+          <form className="" onSubmit={this.add}>
+              <div className="">
+                  <label>Número</label>
+                  <input
+                   type="text"
+                   placeholder="Número"
+                   value={this.state.number} 
+                   onChange={(e) => this.setState({number: e.target.value})}
+                  />
+              </div>
+              <div className="">
+                  <label>Faixa</label>
+                  <input 
+                    type="text"
+                    placeholder="Faixa"
+                    value={this.state.track} 
+                    onChange={(e) => this.setState({track: e.target.value})}
+                  />
+              </div>
+              <div className="">
+                  <label>Duração</label>
+                  <input 
+                    type="text"
+                    placeholder="Duração"
+                    value={this.state.duration} 
+                    onChange={(e) => this.setState({duration: e.target.value})}
+                  />
+              </div>
+              <button className="button">Adicionar</button>
+          </form>
+      </div>
+    );
+  };
+  }
 
 export default AddTrack;

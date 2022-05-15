@@ -1,14 +1,14 @@
 import React from "react";
 import './index.css';
 
-const TrackList = (props) => {
+const TrackList = ({tracks, deleteTrack}) => {
 
-    const renderTrackList = props.tracks.map((track) => {
+    const renderTrackList = tracks.map((track) => {
         return (
-            <div className="item">
+            <div className="item" key={track.id}>
                 <label className="item1">{track.number}</label>
                 <label className="item2">{track.track}</label>
-                <label className="item3">{track.duration}</label>
+                <label className="item3">{track.duration}<button className="delete-item" alt="Excluir" onClick={() => deleteTrack(track)}>&#10006;</button></label>                
             </div>
         );
     })
@@ -19,7 +19,7 @@ const TrackList = (props) => {
         <div className="item">
             <label className="item1">Nº</label>
             <label className="item2">Faixa</label>
-            <label className="item3">Duração</label>
+            <label className="item3">Duração</label>            
         </div>
         {renderTrackList}   
     </div>
