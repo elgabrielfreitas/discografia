@@ -1,88 +1,97 @@
 import React, { useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { BrowserRouter as Router } from 'react-router-dom';
+// import { v4 as uuidv4 } from 'uuid';
 import Header from './Header';
-import AddTrack from './AddTrack';
+// import AddTrack from './AddTrack';
 import TrackList from './TrackList';
 import api from '../api/tracks';
 import Modal from './Modal';
+import AddAlbum from './AddAlbum';
 
 function App() {
-  const [tracks, setTracks] = useState([]);
-  const [search, setSearch] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [openModal, setOpenModal] = useState(false);
+      const [albums, setAlbums] = useState([]);
+      const [search, setSearch] = useState("");
+      const [searchResults, setSearchResults] = useState([]);
+      const [openModal, setOpenModal] = useState(false);
 
-  const retrieveTracks = async () => {
-    const response = await api.get("/tracks");
-    return response.data
-  }
-
-  const searchHandler = (search) => {
-    setSearch(search);
-    if (search !== "") {
-      const newTrackList = tracks.filter((track) => {
-        return Object.values(track)
-          .join(" ")
-          .toLowerCase()
-          .includes(search.toLowerCase());
-      });
-      setSearchResults(newTrackList);
-    } else {
-      setSearchResults(tracks);
-    }
-  };
-
-  const addTrackHandler = async (track) => {
-    const request = {
-      id: uuidv4(),
-      ...track
-    }
-  
-    const response = await api.post("/tracks", request)
-    setTracks([...tracks, response.data])
-  };
-
-  const deleteTrackHandler = async (trackToRemove) => {
-    await api.delete(`/tracks/${trackToRemove.id}`)
-    const newTrackList = tracks.filter((track) => {
-      if (track !== trackToRemove) {
-        return true
-      } else {
-        return false
+      const retrieveAlbums = async () => {
+        const response = await api.get("/album?keyword=");
+        return response.data.data
       }
-    }) 
-    setTracks(newTrackList)
-  }
 
-  useEffect(() => {
-    const getAllTracks = async () => {
-      const allTracks = await retrieveTracks();
-      if (allTracks) setTracks(allTracks);
-    };
+      const searchHandler = (search) => {
+        setSearch(search);
+        if (search !== "") {
+          const newTrackList = albums.filter((track) => {
+            return Object.values(track)
+              .join(" ")
+              .toLowerCase()
+              .includes(search.toLowerCase());
+          });
+          setSearchResults(newTrackList);
+        } else {
+          setSearchResults(albums);
+        }
+      };
 
-    getAllTracks();
-  }, []);
+      // const addTrackHandler = async (track) => {
+      //   const request = {
+      //     ...track
+      //   }
+      //   const response = await api.post("/track", request)
+      //     setAlbums([...albums, response.data])
+      //   };
+      
+      const addAlumHandler = async (track) => {
+        const request = {
+          ...track
+        }
+        const response = await api.post("/track", request)
+          setAlbums([...albums, response.data])
+        };
 
-  return (
-    <>
-      <Header />    
-      <TrackList
-        tracks={search.length < 1 ? tracks : searchResults}
-        deleteTrack={deleteTrackHandler}
-        term={search}
-        searchKey = {searchHandler}
-        addNewTrack = {setOpenModal}
-      />
-      {openModal && (
-        <Modal>
-          <AddTrack
-            addTrackHandler={addTrackHandler}
-            closeModal={setOpenModal}
-          />
-        </Modal>
-      )}
-    </>
-  );
+      const deleteTrackHandler = async (track) => {
+        await api.delete(`/track/${track.id}`)
+        const data = await retrieveAlbums();
+        setAlbums(data);
+      }
+
+      useEffect(() => {
+        const getAllAlbums = async () => {
+          const allAlbums = await retrieveAlbums();
+          if (allAlbums) setAlbums(allAlbums);
+        };
+
+        getAllAlbums();
+      }, []);
+
+      return (
+        <>
+          <Router>
+            <Header />
+            <TrackList
+              albums={search.length < 1 ? albums : searchResults}
+              deleteTrack={deleteTrackHandler}
+              term={search}
+              searchKey = {searchHandler}
+              modal = {setOpenModal}
+            />
+            {openModal && (
+              <Modal>
+                <AddAlbum 
+                  addAlbumHandler={addAlumHandler}
+                  modal = {setOpenModal}
+                />
+                {/* <AddTrack
+                  addTrackHandler={addTrackHandler}
+                  closeModal={setOpenModal}
+                  albums={albums}
+                /> */}
+              </Modal>
+            )}
+          </Router>
+        </>
+      );
 }
 
 export default App;
