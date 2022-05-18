@@ -6,6 +6,7 @@
 .album-title {
     display: flex;
     justify-content:space-between;
+    align-items: center;
     font-size: 1em;
     font-weight: bold;
     font-family: Arial;
