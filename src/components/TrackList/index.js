@@ -1,26 +1,9 @@
 import React, { useRef } from "react";
 import './index.css';
 
-const TrackList = ({albums, deleteTrack, term, searchKey, modal}) => {
+const TrackList = ({albums, deleteTrack, deleteAlbum, term, searchKey, modal}) => {
 
     const input = useRef("");
-
-    // TRACK LIST RENDER
-    const renderTrackList = albums.map((album) => {
-        return (
-            <div key={album.id}>
-                {album.tracks.map((track) => {
-                    return (
-                        <div className="item" key={track.id}>
-                            <label className="item1">{track.number}</label>
-                            <label className="item2">{track.title}</label>
-                            <label className="item3">{track.duration}<button type="button" className="delete-item" alt="Excluir" onClick={() => deleteTrack(track)}>&#10006;</button></label>
-                        </div>
-                    )
-                })}            
-            </div>
-        );
-    });
 
     // SEARCH VALUE
     const getSearch = () => {
@@ -49,16 +32,21 @@ const TrackList = ({albums, deleteTrack, term, searchKey, modal}) => {
             {albums.map((album) => {
                 return (
                     <div className="list-container" key={album.id}>
-                        <h2 className="album-title">Álbum: {album.name}, {album.year}</h2>
+                        <h2 className="album-title">Álbum: {album.name}, {album.year} <button type="button" className="delete-item" alt="Excluir" onClick={() => deleteAlbum(album)}>&#10006;</button></h2>
                             <div className="item">
                                 <label className="item1">Nº</label>
                                 <label className="item2">Faixa</label>
                                 <label className="item3">Duração</label>            
                             </div>
-                            {renderTrackList.length > 0
-                                ? renderTrackList
-                                : <div className="item">Nenhum resultado</div>} 
-                            
+                            {album.tracks.map((track) => {
+                                return (
+                                    <div className="item" key={track.id}>
+                                        <label className="item1">{track.number}</label>
+                                        <label className="item2">{track.title}</label>
+                                        <label className="item3">{track.duration.toString()[0]}:{track.duration.toString().substr(1,2)}<button type="button" className="delete-item" alt="Excluir" onClick={() => deleteTrack(track)}>&#10006;</button></label>
+                                    </div>
+                                )
+                            })}                         
                     </div>
                 )
             })}

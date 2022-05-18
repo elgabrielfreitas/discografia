@@ -1,8 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useState } from 'react';
+import api from '../../api/tracks';
 import './index.css';
 
-const AddAlbum = ({addAlbumHandler}) => {
+const AddAlbum = () => {
+
+    const [name, setName] = useState("");
+    const [year, setYear] = useState("");
+
+    const addAlbum = (e) => {
+      // e.preventDefault();
+      // console.log(year)
+      // const album = { name: name, year: "1234" };
+      // return console.log(album)
+      const response = api.post('/album', { name: name, year: "1234" })
+      .then(() => console.log(response))                      
+      .catch((err) => console.log(err));
+    }
+
     return (
     <div className="add-album-container" >
         <a className="links" id="toalbum"></a>
@@ -30,7 +45,7 @@ const AddAlbum = ({addAlbumHandler}) => {
                 </p>              
                 
                 <p className='add-item-submit'> 
-                  <input className="add-link" type="submit" value="Adicionar"/> 
+                  <button className="add-link" onClick={() => {addAlbum()}}>Adicionar</button> 
                 </p>
                 <p className='add-item-submit'> 
                   <a href="/" className="add-link-red" type="submit" placeholder="Cancelar">Cancelar</a> 
@@ -49,14 +64,14 @@ const AddAlbum = ({addAlbumHandler}) => {
               <h1 className="add-title">Adicionar Álbum</h1> 
               <div className="add-form">
                 <p className="add-item"> 
-                  <input className='add-input' name="name" required="required" type="text" placeholder="Nome do Álbum" />
+                  <input className='add-input' name="name" required="required" type="text" placeholder="Nome do Álbum" onChange={(e) => setName(e.target.value)}/>
                 </p>                
                 <p className='add-item'> 
-                  <input className='add-input' id="email_cad" name="year" required="required" type="value" placeholder="Ano do Álbum"/> 
+                  <input className='add-input' name="year" required="required" type="text" placeholder="Ano do Álbum" onChange={(e) => setYear(e.target.value)}/> 
                 </p>
 
-                <p className='add-item-submit'> 
-                  <input className="add-link" type="submit" value="Adicionar"/> 
+                <p className='add-item-submit'>
+                  <button className="add-link" onClick={() => addAlbum()}>Adicionar</button>
                 </p>
                 <p className='add-item-submit'> 
                   <a href="/" className="add-link-red" type="submit" placeholder="Cancelar">Cancelar</a>                             

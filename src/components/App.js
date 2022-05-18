@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-// import { v4 as uuidv4 } from 'uuid';
 import Header from './Header';
 // import AddTrack from './AddTrack';
 import TrackList from './TrackList';
@@ -14,6 +13,8 @@ function App() {
       const [searchResults, setSearchResults] = useState([]);
       const [openModal, setOpenModal] = useState(false);
 
+      albums.map(album => console.log(album.tracks))
+      
       const retrieveAlbums = async () => {
         const response = await api.get("/album?keyword=");
         return response.data.data
@@ -42,16 +43,14 @@ function App() {
       //     setAlbums([...albums, response.data])
       //   };
       
-      const addAlumHandler = async (track) => {
-        const request = {
-          ...track
-        }
-        const response = await api.post("/track", request)
-          setAlbums([...albums, response.data])
-        };
-
       const deleteTrackHandler = async (track) => {
         await api.delete(`/track/${track.id}`)
+        const data = await retrieveAlbums();
+        setAlbums(data);
+      }
+
+      const deleteAlbumHandler = async (album) => {
+        await api.delete(`/album/${album.id}`)
         const data = await retrieveAlbums();
         setAlbums(data);
       }
@@ -61,7 +60,6 @@ function App() {
           const allAlbums = await retrieveAlbums();
           if (allAlbums) setAlbums(allAlbums);
         };
-
         getAllAlbums();
       }, []);
 
@@ -72,16 +70,14 @@ function App() {
             <TrackList
               albums={search.length < 1 ? albums : searchResults}
               deleteTrack={deleteTrackHandler}
+              deleteAlbum={deleteAlbumHandler}
               term={search}
               searchKey = {searchHandler}
               modal = {setOpenModal}
             />
             {openModal && (
               <Modal>
-                <AddAlbum 
-                  addAlbumHandler={addAlumHandler}
-                  modal = {setOpenModal}
-                />
+                <AddAlbum />
                 {/* <AddTrack
                   addTrackHandler={addTrackHandler}
                   closeModal={setOpenModal}
