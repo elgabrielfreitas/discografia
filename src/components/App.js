@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Header from './Header';
-// import AddTrack from './AddTrack';
 import TrackList from './TrackList';
 import api from '../api/tracks';
 import Modal from './Modal';
@@ -9,45 +8,31 @@ import AddAlbum from './AddAlbum';
 
 function App() {
       const [albums, setAlbums] = useState([]);
+      const [tracks, setTracks] = useState([]);
       const [search, setSearch] = useState("");
       const [searchResults, setSearchResults] = useState([]);
       const [openModal, setOpenModal] = useState(false);
 
       const retrieveAlbums = async () => {
-        const response = await api.get("/album?keyword=");
-        console.log(response.data.data)
+        const response = await api.get("/album?keyword=")
         return response.data.data
       }
-
-      const retrieveTracks = async () => {
-        const response = await api.get("/album?keyword=");
-        return response.data.data
-      }
-
 
       const searchHandler = (search) => {
         setSearch(search);
         if (search !== "") {
-          const newTrackList = albums.filter((track) => {
-            return Object.values(track)
+          const newTrackList = albums.filter((album) => {
+            return Object.values(album)
               .join(" ")
               .toLowerCase()
               .includes(search.toLowerCase());
           });
           setSearchResults(newTrackList);
         } else {
-          setSearchResults(albums);
+          setSearchResults(albums);          
         }
       };
 
-      // const addTrackHandler = async (track) => {
-      //   const request = {
-      //     ...track
-      //   }
-      //   const response = await api.post("/track", request)
-      //     setAlbums([...albums, response.data])
-      //   };
-      
       const deleteTrackHandler = async (track) => {
         await api.delete(`/track/${track.id}`)
         const data = await retrieveAlbums();
@@ -63,7 +48,19 @@ function App() {
       useEffect(() => {
         const getAllAlbums = async () => {
           const allAlbums = await retrieveAlbums();
-          if (allAlbums) setAlbums(allAlbums);
+          if (allAlbums) {
+            setAlbums(allAlbums);            
+          }
+        };
+        getAllAlbums();
+      }, []);
+
+      useEffect(() => {
+        const getAllAlbums = async () => {
+          const allAlbums = await retrieveAlbums();
+          if (allAlbums) {
+            console.log(allAlbums)         
+          }
         };
         getAllAlbums();
       }, []);
@@ -82,12 +79,7 @@ function App() {
             />
             {openModal && (
               <Modal>
-                <AddAlbum />
-                {/* <AddTrack
-                  addTrackHandler={addTrackHandler}
-                  closeModal={setOpenModal}
-                  albums={albums}
-                /> */}
+                <AddAlbum albums={albums} />
               </Modal>
             )}
           </Router>

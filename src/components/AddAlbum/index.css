@@ -140,7 +140,7 @@
 	background: #0b0b0b;
 	color: #7f7c7c;
 	left: 0px;
-	height: 20px;
+	height: 18px;
 	width: 60vw;
 	padding: 20px 30px;
 	font-size: 13px;
@@ -186,7 +186,27 @@
   }
 
   .add-link-red:hover {
-	  background-color: #da3939d2;
+	background-color: #da3939d2;
+	}
+
+  .add-link-green {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    color: #000000;
+    font-family: Arial;
+    width: 50%;
+    height: 40px;
+    background-color: #3abe12;
+    font-size: 14px;
+	text-decoration: none
+  }
+
+  .add-link-green:hover {
+	  background-color: #3abe12d2;
   }
 
   .link-text {

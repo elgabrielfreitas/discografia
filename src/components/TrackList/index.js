@@ -34,16 +34,16 @@ const TrackList = ({albums, deleteTrack, deleteAlbum, term, searchKey, modal}) =
                     <div className="list-container" key={album.id}>
                         <h2 className="album-title">Álbum: {album.name}, {album.year} <button type="button" className="delete-item" alt="Excluir" onClick={() => deleteAlbum(album)}>&otimes;</button></h2>
                             <div className="item">
-                                <label className="item1">Nº</label>
-                                <label className="item2">Faixa</label>
-                                <label className="item3">Duração</label>            
+                                <p className="item1">Nº</p>
+                                <p className="item2">Faixa</p>
+                                <p className="item3">Duração</p>            
                             </div>
                             {album.tracks.map((track) => {
                                 return (
                                     <div className="item" key={track.id}>
-                                        <label className="item1">{track.number}</label>
-                                        <label className="item2">{track.title}</label>
-                                        <label className="item3">{track.duration.toString()[0]}:{track.duration.toString().substr(1,2)}<button type="button" className="delete-item" alt="Excluir" onClick={() => deleteTrack(track)}>&otimes;</button></label>
+                                        <p className="item1">{track.number}</p>
+                                        <p className="item2">{track.title}</p>
+                                        <p className="item3">{track.duration.toString()[0]}:{track.duration.toString().substr(1,2)}<button type="button" className="delete-item" alt="Excluir" onClick={() => deleteTrack(track)}>&otimes;</button></p>
                                     </div>
                                 )
                             })}                         

@@ -3,6 +3,7 @@ import axios from "axios";
 export default axios.create({
   baseURL: "https://tiao.supliu.com.br/api/",
   headers: {
-    'Authorization': "bielfreitascontato@gmail.com"
+    "Authorization": "bielfreitascontato@gmail.com",
+    "Content-type": "application/json"
   }
 });
