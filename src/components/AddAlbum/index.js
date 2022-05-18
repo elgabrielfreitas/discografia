@@ -42,6 +42,7 @@ const AddAlbum = (albums) => {
       }
       if (track.album_id === "") {
         alert("Selecione um álbum")
+        return
       }
       const regex = /^[0-9.]+$/;
       if (!regex.test(track.number)) {

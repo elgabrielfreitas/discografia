@@ -16,7 +16,7 @@ function App() {
       const retrieveAlbums = async () => {
         const response = await api.get("/album?keyword=")
         return response.data.data
-      }
+      }      
 
       const searchHandler = (search) => {
         setSearch(search);
@@ -59,12 +59,17 @@ function App() {
         const getAllAlbums = async () => {
           const allAlbums = await retrieveAlbums();
           if (allAlbums) {
-            console.log(allAlbums)         
+            albums.map(album => {
+              album.tracks.map(track => {
+                setTracks(track)               
+              })
+            })         
           }
         };
         getAllAlbums();
       }, []);
 
+      
       return (
         <>
           <Router>
