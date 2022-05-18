@@ -14,7 +14,7 @@ const AddAlbum = () => {
       // const album = { name: name, year: "1234" };
       // return console.log(album)
       const response = api.post('/album', { name: name, year: "1234" })
-      .then(() => console.log(response))                      
+      // .then(() => console.log(response))                      
       .catch((err) => console.log(err));
     }
 

@@ -13,12 +13,17 @@ function App() {
       const [searchResults, setSearchResults] = useState([]);
       const [openModal, setOpenModal] = useState(false);
 
-      albums.map(album => console.log(album.tracks))
-      
       const retrieveAlbums = async () => {
+        const response = await api.get("/album?keyword=");
+        console.log(response.data.data)
+        return response.data.data
+      }
+
+      const retrieveTracks = async () => {
         const response = await api.get("/album?keyword=");
         return response.data.data
       }
+
 
       const searchHandler = (search) => {
         setSearch(search);
