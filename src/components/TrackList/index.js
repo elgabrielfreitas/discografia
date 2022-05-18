@@ -32,7 +32,7 @@ const TrackList = ({albums, deleteTrack, deleteAlbum, term, searchKey, modal}) =
             {albums.map((album) => {
                 return (
                     <div className="list-container" key={album.id}>
-                        <h2 className="album-title">Álbum: {album.name}, {album.year} <button type="button" className="delete-item" alt="Excluir" onClick={() => deleteAlbum(album)}>&#10006;</button></h2>
+                        <h2 className="album-title">Álbum: {album.name}, {album.year} <button type="button" className="delete-item" alt="Excluir" onClick={() => deleteAlbum(album)}>&otimes;</button></h2>
                             <div className="item">
                                 <label className="item1">Nº</label>
                                 <label className="item2">Faixa</label>
@@ -43,7 +43,7 @@ const TrackList = ({albums, deleteTrack, deleteAlbum, term, searchKey, modal}) =
                                     <div className="item" key={track.id}>
                                         <label className="item1">{track.number}</label>
                                         <label className="item2">{track.title}</label>
-                                        <label className="item3">{track.duration.toString()[0]}:{track.duration.toString().substr(1,2)}<button type="button" className="delete-item" alt="Excluir" onClick={() => deleteTrack(track)}>&#10006;</button></label>
+                                        <label className="item3">{track.duration.toString()[0]}:{track.duration.toString().substr(1,2)}<button type="button" className="delete-item" alt="Excluir" onClick={() => deleteTrack(track)}>&otimes;</button></label>
                                     </div>
                                 )
                             })}                         

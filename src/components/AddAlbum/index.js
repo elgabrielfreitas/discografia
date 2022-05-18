@@ -54,7 +54,7 @@ const AddAlbum = () => {
               
               <p className="link">  
                 <small className='link-text'>Adicionar um álbum? </small>
-                <a className="add-link" href="#toalbum">Álbum</a>
+                <a className="add-link" href="#toalbum">&oplus; Álbum</a>
               </p>
             </form>
           </div>
@@ -79,7 +79,7 @@ const AddAlbum = () => {
               </div>                      
               <p className="link">  
                 <small className='link-text'>Adicionar uma faixa? </small>
-                <a className="add-link" href="#totrack">Faixa</a>
+                <a className="add-link" href="#totrack">&oplus; Faixa</a>
               </p>
             </form>
           </div>
