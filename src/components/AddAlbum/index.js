@@ -26,7 +26,7 @@ const AddAlbum = () => {
         <div className="content">      
           <div id="track">
             <form method="post" action=""> 
-              <h1 className='add-title'>Adicionar Faixa</h1>
+              <h1 className='add-title'>Faixa</h1>
               <div className="add-form">
                 <p className="add-item"> 
                   <select className='add-input' name="name" required="required" type="text" placeholder="Nome da Faixa">
@@ -54,7 +54,7 @@ const AddAlbum = () => {
               
               <p className="link">  
                 <small className='link-text'>Adicionar um álbum? </small>
-                <a className="add-link" href="#toalbum">Adicionar Álbum</a>
+                <a className="add-link" href="#toalbum">Álbum</a>
               </p>
             </form>
           </div>
