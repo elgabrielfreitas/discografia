@@ -54,6 +54,10 @@ const AddAlbum = (albums) => {
         alert('Exemplo: para "3:00" inserir apenas "300".')
         return
       }
+      if (track.duration.length !== 3) {
+        alert("Campo 'Duração da Faixa' deve conter 3 dígitos.");
+        return
+      }
       api.post('/track', track)     
       .then(() => window.location.reload())                      
       .catch((err) => alert(err.response.data.error));
