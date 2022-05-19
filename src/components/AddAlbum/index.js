@@ -31,7 +31,7 @@ const AddAlbum = (albums) => {
         return
       }
       api.post('/album', album)     
-      .then(() => window.location.reload())                      
+      .then(() => window.location.href = "/")                      
       .catch((err) => alert(err.response.data.error));
     }
 
@@ -59,7 +59,7 @@ const AddAlbum = (albums) => {
         return
       }
       api.post('/track', track)     
-      .then(() => window.location.reload())                      
+      .then(() => window.location.href = "/")                      
       .catch((err) => alert(err.response.data.error));
     }
 
