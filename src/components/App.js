@@ -8,7 +8,6 @@ import AddAlbum from './AddAlbum';
 
 function App() {
       const [albums, setAlbums] = useState([]);
-      const [tracks, setTracks] = useState([]);
       const [search, setSearch] = useState("");
       const [searchResults, setSearchResults] = useState([]);
       const [openModal, setOpenModal] = useState(false);
@@ -50,20 +49,6 @@ function App() {
           const allAlbums = await retrieveAlbums();
           if (allAlbums) {
             setAlbums(allAlbums);            
-          }
-        };
-        getAllAlbums();
-      }, []);
-
-      useEffect(() => {
-        const getAllAlbums = async () => {
-          const allAlbums = await retrieveAlbums();
-          if (allAlbums) {
-            albums.map(album => {
-              album.tracks.map(track => {
-                setTracks(track)               
-              })
-            })         
           }
         };
         getAllAlbums();
